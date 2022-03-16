@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,35 +32,38 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.masterproject.MainActivity;
 import com.example.masterproject.R;
 import com.example.masterproject.RequestedPage;
 import com.example.masterproject.ui.login.LoginViewModel;
 import com.example.masterproject.ui.login.LoginViewModelFactory;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Map;
 
-import static com.example.masterproject.MainActivity.TAG;
-
-public class LoginActivityCsuf extends AppCompatActivity {
+public class LoginActivityDph extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-    private String TAG = "LoginActivity";
-    private boolean isVerified;
-
+    private String TAG = "LoginActivityDph";
+    ImageView ivLogin;
+    String value;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_csuf);
+        setContentView(R.layout.activity_login_dph);
+
+        ivLogin = findViewById(R.id.iv_login);
+        Bundle extras = getIntent().getExtras();
+        value = extras.getString("key");
+
+        if (value.equals("dph")){
+            ivLogin.setImageResource(R.mipmap.cadph_1_logo);
+        }
+        else
+            ivLogin.setImageResource(R.mipmap.dmv_1_logo);
+
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
-
-
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
@@ -88,7 +92,7 @@ public class LoginActivityCsuf extends AppCompatActivity {
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                loadingProgressBar.setVisibility(View.GONE);
 
                 setResult(Activity.RESULT_OK);
 
@@ -140,13 +144,13 @@ public class LoginActivityCsuf extends AppCompatActivity {
                 String check_ID = "http://127.0.0.1:8000/verify/?credential=" + addData;
                 Log.d(TAG, "1: " + check_ID);
 
-                RequestQueue queue = Volley.newRequestQueue(LoginActivityCsuf.this);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivityDph.this);
 
                 StringRequest stringRequestVerify = new StringRequest(Request.Method.GET, check_ID,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(LoginActivityCsuf.this, response, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivityDph.this, response, Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "2 " + response);
                                 if (response.equals("null")){
                                     postData(addData, queue);
@@ -162,9 +166,9 @@ public class LoginActivityCsuf extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivityCsuf.this, "FAILED_verify", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                        Toast.makeText(LoginActivityDph.this, "FAILED_verify", Toast.LENGTH_LONG).show();
+                    }
+                });
                 queue.add(stringRequestVerify);
 
             }
@@ -182,14 +186,14 @@ public class LoginActivityCsuf extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(LoginActivityCsuf.this, "DATA POSTED", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivityDph.this, "DATA POSTED", Toast.LENGTH_LONG).show();
                         Log.d(TAG, "5 "+ response);
                         getKey(addData, queue);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivityCsuf.this, "FAILED", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivityDph.this, "FAILED", Toast.LENGTH_LONG).show();
             }
         }){
 //                    @Override
@@ -204,7 +208,7 @@ public class LoginActivityCsuf extends AppCompatActivity {
     }
 
     void dupData(){
-        Intent intent = new Intent(LoginActivityCsuf.this, RequestedPage.class);
+        Intent intent = new Intent(LoginActivityDph.this, RequestedPage.class);
         startActivity(intent);
         Log.d(TAG, "DUPLICATE DATA. NO POST");
     }
@@ -220,12 +224,12 @@ public class LoginActivityCsuf extends AppCompatActivity {
                     public void onResponse(String response) {
                         //Toast.makeText(LoginActivityCsuf.this, response, Toast.LENGTH_LONG).show();
                         Log.d(TAG, "6 pubKey: " + response);
-                        writeToFile(response, LoginActivityCsuf.this);
+                        writeToFile(response, LoginActivityDph.this);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivityCsuf.this, "FAILED_pubkey", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivityDph.this, "FAILED_pubkey", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequestKey);
@@ -233,19 +237,33 @@ public class LoginActivityCsuf extends AppCompatActivity {
 
     void writeToFile(String data, Context context){
         try{
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("csuf_KEY.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(data);
-            Log.d(TAG, "CSUF File created");
-            String path = context.getFilesDir().getAbsolutePath();
-            outputStreamWriter.close();
+            if (value.equals("dph")){
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("dph_KEY.txt", Context.MODE_PRIVATE));
+                outputStreamWriter.write(data);
+                Log.d(TAG, "DPH File created");
+                //String path = context.getFilesDir().getAbsolutePath();
+                outputStreamWriter.close();
+            }
+            else{
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("dmv_KEY.txt", Context.MODE_PRIVATE));
+                outputStreamWriter.write(data);
+                Log.d(TAG, "DMV File created");
+                //String path = context.getFilesDir().getAbsolutePath();
+                outputStreamWriter.close();
+            }
+
+
         } catch (IOException e) {
             Log.d(TAG, "FAILED TO WRITE TO csuf_KEY");
         }
     }
 
     void nextActivity(){
-        Intent intent = new Intent(LoginActivityCsuf.this, RequestedPage.class);
-        intent.putExtra("key", "csuf");
+        Intent intent = new Intent(LoginActivityDph.this, RequestedPage.class);
+        if (value.equals("dph"))
+            intent.putExtra("key", "dph");
+        else
+            intent.putExtra("key", "dmv");
         startActivity(intent);
         Log.d(TAG, "7 POST DATA");
     }

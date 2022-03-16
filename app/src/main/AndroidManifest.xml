@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MasterProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SchoolDocuments"></activity>
+        <activity android:name=".DmvDocuments"></activity>
+        <activity android:name=".CdphDocuments" />
+        <activity
+            android:name=".ui.login.LoginActivityDph"
+            android:label="@string/title_activity_login_dph" />
+        <activity android:name=".SchoolDocuments" />
         <activity android:name=".CurrentDocuments" />
         <activity android:name=".LogActivity" />
         <activity

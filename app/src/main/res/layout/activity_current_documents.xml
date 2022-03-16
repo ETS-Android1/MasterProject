@@ -20,8 +20,8 @@
 
     <ImageButton
         android:id="@+id/imgBtnCsuf"
-        android:layout_width="237dp"
-        android:layout_height="120dp"
+        android:layout_width="246dp"
+        android:layout_height="163dp"
         android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
@@ -41,5 +41,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imgBtnDph"
+        android:layout_width="248dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="@+id/imgBtnCsuf"
+        app:layout_constraintStart_toStartOf="@+id/imgBtnCsuf"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtnCsuf"
+        app:srcCompat="@mipmap/cadph_1_logo" />
+
+    <ImageButton
+        android:id="@+id/imgBtnDmv"
+        android:layout_width="248dp"
+        android:layout_height="209dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="@+id/imgBtnDph"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imgBtnDph"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtnDph"
+        app:srcCompat="@mipmap/dmv_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SchoolDocuments">
+    tools:context=".CdphDocuments">
 
     <ImageView
-        android:id="@+id/ivSchoolRecord"
+        android:id="@+id/ivCdphRecord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -19,26 +19,26 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvIssuedBy"
+        android:id="@+id/tvIssuedByCdph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This Card issued by CSUF"
+        android:text="This Card issued by CDPH"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivSchoolRecord" />
+        app:layout_constraintTop_toBottomOf="@+id/ivCdphRecord" />
 
     <Spinner
-        android:id="@+id/spinDetails"
+        android:id="@+id/spinDetailsCdph"
         android:layout_width="353dp"
         android:layout_height="36dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/wvDetails"
+        app:layout_constraintBottom_toTopOf="@+id/wvDetailsCdph"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvIssuedBy" />
+        app:layout_constraintTop_toBottomOf="@+id/tvIssuedByCdph" />
 
     <WebView
-        android:id="@+id/wvDetails"
+        android:id="@+id/wvDetailsCdph"
         android:layout_width="381dp"
         android:layout_height="336dp"
         android:layout_marginStart="8dp"
@@ -47,4 +47,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

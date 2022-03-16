@@ -26,7 +26,6 @@ public class SchoolDocuments extends AppCompatActivity {
     ImageView ivSchoolRecord;
     Spinner spinDetails;
     WebView wvDetails;
-    private Object AdapterView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +62,10 @@ public class SchoolDocuments extends AppCompatActivity {
 
         wvDetails = findViewById(R.id.wvDetails);
 
-
         ivSchoolRecord = findViewById(R.id.ivSchoolRecord);
 
-        String img_url = "https://lh4.googleusercontent.com/3N_6x1fzj-rt_nKo4wnYBbYz2XLqtou1DNKVwZQDwezkKoBZ-IdFSe-pUN3U763F61re03kEMHIvMb0owx11MkxfRZEAaRCmxRMaHQSe1olZax-N5FFUOiHcL8xtYbwcpQ=w1280";
+        //check this url
+        String img_url = "https://lh3.googleusercontent.com/NOxDrEoP6C6IYcY1fQSkLXf6qoab7JhWAdvdpl9ouqUdjTbTz9U13_oiSyew_slE70V474_5yGpJsersxUzb7ubvpvXT_UfllyvBNlwK9-nhv0bayeHqGusBoRv2VrIArQ=w1280";
 
         Picasso.get().load(img_url).resize(1500,800).into(ivSchoolRecord);
     }
