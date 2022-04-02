@@ -40,6 +40,8 @@ import com.example.masterproject.ui.login.LoginViewModelFactory;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,12 +90,12 @@ public class LoginActivityCsuf extends AppCompatActivity {
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.VISIBLE);
 
+                loadingProgressBar.setVisibility(View.VISIBLE);
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+                //finish();
             }
         });
 
@@ -136,9 +138,11 @@ public class LoginActivityCsuf extends AppCompatActivity {
                         passwordEditText.getText().toString());
                 String addData = usernameEditText.getText().toString();
 
-                //String check_ID = "http://10.0.2.2:8000/verify/?credential=" + addData;
-                String check_ID = "http://127.0.0.1:8000/verify/?credential=" + addData;
+                String check_ID = "http://10.0.2.2:8000/verify/?credential=" + addData;
+                //String check_ID = "http://127.0.0.1:8000/verify/?credential=" + addData;
                 Log.d(TAG, "1: " + check_ID);
+
+                writeLogFile();
 
                 RequestQueue queue = Volley.newRequestQueue(LoginActivityCsuf.this);
 
@@ -146,13 +150,12 @@ public class LoginActivityCsuf extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(LoginActivityCsuf.this, response, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginActivityCsuf.this, response, Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "2 " + response);
                                 if (response.equals("null")){
                                     postData(addData, queue);
                                     nextActivity();
 
-                                    //nextActivity();
                                 }
                                 else{
                                     dupData();
@@ -171,9 +174,22 @@ public class LoginActivityCsuf extends AppCompatActivity {
         });
     }
 
+    private void writeLogFile() {
+        try{
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(LoginActivityCsuf.this.openFileOutput("logFile.txt", Context.MODE_APPEND));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+            String currentDateTime = dateFormat.format(new Date());
+            outputStreamWriter.write(currentDateTime + " CSUF Credential Requested\n");
+            Log.d(TAG, "CSUF Log created");
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.d(TAG, "FAILED TO WRITE TO csuf_Log");
+        }
+    }
+
     void postData(String addData, RequestQueue queue){
-        String post_url = "http://127.0.0.1:8000/add_block/" + "?data=" + addData;
-        //String post_url = "http://10.0.2.2:8000/add_block/" + "?data=" + addData;
+        //String post_url = "http://127.0.0.1:8000/add_block/" + "?data=" + addData;
+        String post_url = "http://10.0.2.2:8000/add_block/" + "?data=" + addData;
         Log.d(TAG, "3 " + post_url);
         Log.d(TAG, "4 " + addData);
 
@@ -182,7 +198,7 @@ public class LoginActivityCsuf extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(LoginActivityCsuf.this, "DATA POSTED", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(LoginActivityCsuf.this, "DATA POSTED", Toast.LENGTH_LONG).show();
                         Log.d(TAG, "5 "+ response);
                         getKey(addData, queue);
                     }
@@ -210,8 +226,8 @@ public class LoginActivityCsuf extends AppCompatActivity {
     }
 
     void getKey(String addData, RequestQueue queue){
-        //String get_url = "http://10.0.2.2:8000/publicKey/?credential=" + addData;
-        String get_url = "http://127.0.0.1:8000/publicKey/?credential=" + addData;
+        String get_url = "http://10.0.2.2:8000/publicKey/?credential=" + addData;
+        //String get_url = "http://127.0.0.1:8000/publicKey/?credential=" + addData;
         Log.d(TAG, get_url);
 
         StringRequest stringRequestKey = new StringRequest(Request.Method.GET, get_url,
@@ -225,7 +241,7 @@ public class LoginActivityCsuf extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivityCsuf.this, "FAILED_pubkey", Toast.LENGTH_LONG).show();
+                //Toast.makeText(LoginActivityCsuf.this, "FAILED_pubkey", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(stringRequestKey);

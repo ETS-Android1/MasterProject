@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnRequest;
     Button btnCurrent;
+    Button btnLog;
 
 
     @Override
@@ -49,12 +50,21 @@ public class MainActivity extends AppCompatActivity {
 
         btnRequest = findViewById(R.id.btnRequest);
         btnCurrent = findViewById(R.id.btnCurrent);
+        btnLog = findViewById(R.id.btnLog);
 
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //navigate to requestCred page
                 Intent intent = new Intent(MainActivity.this, RequestCred.class);
+                startActivity(intent);
+            }
+        });
+
+        btnLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LogActivity.class);
                 startActivity(intent);
             }
         });

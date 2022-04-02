@@ -56,7 +56,7 @@ public class CdphDocuments extends AppCompatActivity {
         ivCdphRecord = findViewById(R.id.ivCdphRecord);
 
         //check this url
-        String img_url = "https://lh6.googleusercontent.com/We_2NHLPtqbYbFWRj77ksqojIped5MNCpy_88KZZBVG9g4N64NV5l63ooUyYKKO-iyIFH6eB-VyiiuOjYlOePlN5XRfFoisy-_yG0UjcWo6tD_H0N-VaxPJyKRrSpExC5g=w1280";
+        String img_url = "https://raw.githubusercontent.com/briankptan/MasterProject/master/IDR_DPH.png";
 
         Picasso.get().load(img_url).resize(1500,800).into(ivCdphRecord);
     }

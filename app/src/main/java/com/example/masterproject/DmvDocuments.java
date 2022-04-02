@@ -57,7 +57,7 @@ public class DmvDocuments extends AppCompatActivity {
         ivDmvRecord = findViewById(R.id.ivDmvRecord);
 
         //check this url
-        String img_url = "https://lh6.googleusercontent.com/j2zH5fQmQwg5wc7l3Y5B37Xz8-UO7luro5TKVVqkqVLdrOyXuTN0zMVa6pH17CYX8BC21XrF-FGoW6zCE95MTOtiXgCZbez1Ou0YYYwnVHlUnmTmjLzlwd1BKhwHKD58tg=w1280";
+        String img_url = "https://raw.githubusercontent.com/briankptan/MasterProject/master/IDR_DMV.png";
 
         Picasso.get().load(img_url).resize(1500,800).into(ivDmvRecord);
     }

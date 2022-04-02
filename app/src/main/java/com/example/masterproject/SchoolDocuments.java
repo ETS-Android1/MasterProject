@@ -61,11 +61,10 @@ public class SchoolDocuments extends AppCompatActivity {
 
 
         wvDetails = findViewById(R.id.wvDetails);
-
         ivSchoolRecord = findViewById(R.id.ivSchoolRecord);
 
         //check this url
-        String img_url = "https://lh3.googleusercontent.com/NOxDrEoP6C6IYcY1fQSkLXf6qoab7JhWAdvdpl9ouqUdjTbTz9U13_oiSyew_slE70V474_5yGpJsersxUzb7ubvpvXT_UfllyvBNlwK9-nhv0bayeHqGusBoRv2VrIArQ=w1280";
+        String img_url = "https://raw.githubusercontent.com/briankptan/MasterProject/master/IDR_CSUF.png";
 
         Picasso.get().load(img_url).resize(1500,800).into(ivSchoolRecord);
     }
