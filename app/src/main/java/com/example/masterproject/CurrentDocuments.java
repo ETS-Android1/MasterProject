@@ -1,16 +1,18 @@
 package com.example.masterproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
 
@@ -21,6 +23,7 @@ public class CurrentDocuments extends AppCompatActivity {
     ImageButton imgBtnDmv;
     TextView tvEmpty;
     private String TAG = "CurrentDocActivity";
+    BottomNavigationView bnv;
 
 
     @Override
@@ -39,6 +42,36 @@ public class CurrentDocuments extends AppCompatActivity {
 
         imgBtnDmv = findViewById(R.id.imgBtnDmv);
         imgBtnDmv.setVisibility(View.INVISIBLE);
+
+        bnv = findViewById(R.id.bnv_current);
+
+        bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        Intent intent4 = new Intent(CurrentDocuments.this, MainActivity.class);
+                        startActivity(intent4);
+                        return true;
+
+                    case R.id.navigation_request:
+                        Intent intent = new Intent(CurrentDocuments.this, RequestCred.class);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.navigation_log:
+                        Intent intent2 = new Intent(CurrentDocuments.this, LogActivity.class);
+                        startActivity(intent2);
+                        return true;
+
+                    case R.id.navigation_documents:
+                        Intent intent3 = new Intent(CurrentDocuments.this, CurrentDocuments.class);
+                        startActivity(intent3);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         //imgBtnCsuf.setBackground(null);
 

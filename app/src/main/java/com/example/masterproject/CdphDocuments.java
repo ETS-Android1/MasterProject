@@ -1,9 +1,12 @@
 package com.example.masterproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -11,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.squareup.picasso.Picasso;
 
 public class CdphDocuments extends AppCompatActivity {
@@ -18,11 +23,42 @@ public class CdphDocuments extends AppCompatActivity {
     ImageView ivCdphRecord;
     Spinner spinDetailsCdph;
     WebView wvDetailsCdph;
+    BottomNavigationView bnv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cdph_documents);
+
+        bnv = findViewById(R.id.bnv_cdph);
+
+        bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        Intent intent4 = new Intent(CdphDocuments.this, MainActivity.class);
+                        startActivity(intent4);
+                        return true;
+
+                    case R.id.navigation_request:
+                        Intent intent = new Intent(CdphDocuments.this, RequestCred.class);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.navigation_log:
+                        Intent intent2 = new Intent(CdphDocuments.this, LogActivity.class);
+                        startActivity(intent2);
+                        return true;
+
+                    case R.id.navigation_documents:
+                        Intent intent3 = new Intent(CdphDocuments.this, CurrentDocuments.class);
+                        startActivity(intent3);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         spinDetailsCdph = findViewById(R.id.spinDetailsCdph);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cdph_info, android.R.layout.simple_spinner_item);

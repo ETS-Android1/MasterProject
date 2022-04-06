@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:title="Home"
+        android:icon="@drawable/home_layer"/>
+
+    <item
+        android:id="@+id/navigation_request"
+        android:title="Request"
+        android:icon="@drawable/request_foreground"/>
+
+    <item
+        android:id="@+id/navigation_log"
+        android:title="Log"
+        android:icon="@drawable/log_foreground"/>
+
+    <item
+        android:id="@+id/navigation_documents"
+        android:title="Documents"
+        android:icon="@drawable/documents_foreground"/>
+
+</menu>

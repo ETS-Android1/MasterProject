@@ -38,9 +38,7 @@ public class RequestedPage extends AppCompatActivity {
 
 
         tv_requestMade = findViewById(R.id.tv_requestMade);
-        tv_requestMade.setText("Your request has been submitted.\n" +
-                " View Request Log for status of requests.\n" +
-                " Successful requests will populate in your Current Documents.");
+        tv_requestMade.setText("Your request has been submitted.\n");
 
         btn_home = findViewById(R.id.btnReturn);
 

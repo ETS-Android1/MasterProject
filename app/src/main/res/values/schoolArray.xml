@@ -3,6 +3,5 @@
     <string-array name="school_info">
         <item>Available Documents</item>
         <item>Transcript</item>
-        <item>Diploma</item>
     </string-array>
 </resources>

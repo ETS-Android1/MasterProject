@@ -67,4 +67,16 @@
         app:layout_constraintTop_toBottomOf="@+id/imgBtnDph"
         app:srcCompat="@mipmap/dmv_logo" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv_current"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

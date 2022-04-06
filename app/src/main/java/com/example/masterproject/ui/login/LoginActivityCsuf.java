@@ -2,6 +2,7 @@ package com.example.masterproject.ui.login;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,6 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -31,11 +33,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.masterproject.CurrentDocuments;
+import com.example.masterproject.LogActivity;
 import com.example.masterproject.MainActivity;
 import com.example.masterproject.R;
+import com.example.masterproject.RequestCred;
 import com.example.masterproject.RequestedPage;
 import com.example.masterproject.ui.login.LoginViewModel;
 import com.example.masterproject.ui.login.LoginViewModelFactory;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -51,7 +58,6 @@ public class LoginActivityCsuf extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private String TAG = "LoginActivity";
-    private boolean isVerified;
 
 
     @Override
@@ -67,6 +73,8 @@ public class LoginActivityCsuf extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override

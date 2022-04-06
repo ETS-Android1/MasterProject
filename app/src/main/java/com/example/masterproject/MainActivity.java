@@ -1,37 +1,18 @@
 package com.example.masterproject;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.RequestParams;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.codepath.asynchttpclient.callback.TextHttpResponseHandler;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
     Button btnRequest;
     Button btnCurrent;
     Button btnLog;
+    BottomNavigationView bnv;
+    TextView tvWelcome;
 
-
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +34,43 @@ public class MainActivity extends AppCompatActivity {
         btnRequest = findViewById(R.id.btnRequest);
         btnCurrent = findViewById(R.id.btnCurrent);
         btnLog = findViewById(R.id.btnLog);
+
+        btnRequest.setVisibility(View.INVISIBLE);
+        btnCurrent.setVisibility(View.INVISIBLE);
+        btnLog.setVisibility(View.INVISIBLE);
+
+        tvWelcome = findViewById(R.id.tv_welcome);
+        tvWelcome.setText("Self-Sovereign Briefcase");
+
+        bnv = findViewById(R.id.bnv_main);
+
+        bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        Intent intent4 = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent4);
+                        return true;
+
+                    case R.id.navigation_request:
+                        Intent intent = new Intent(MainActivity.this, RequestCred.class);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.navigation_log:
+                        Intent intent2 = new Intent(MainActivity.this, LogActivity.class);
+                        startActivity(intent2);
+                        return true;
+
+                    case R.id.navigation_documents:
+                        Intent intent3 = new Intent(MainActivity.this, CurrentDocuments.class);
+                        startActivity(intent3);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override

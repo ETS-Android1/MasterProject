@@ -3,6 +3,5 @@
     <string-array name="dmv_info">
         <item>Available Documents</item>
         <item>Driver License</item>
-        <item>Driver Details</item>
     </string-array>
 </resources>

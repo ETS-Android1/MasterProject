@@ -1,8 +1,11 @@
 package com.example.masterproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -11,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.squareup.picasso.Picasso;
 
 public class DmvDocuments extends AppCompatActivity {
@@ -18,11 +23,42 @@ public class DmvDocuments extends AppCompatActivity {
     ImageView ivDmvRecord;
     Spinner spinDetailsDmv;
     WebView wvDetailsDmv;
+    BottomNavigationView bnv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dmv_documents);
+
+        bnv = findViewById(R.id.bnv_dmv);
+
+        bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        Intent intent4 = new Intent(DmvDocuments.this, MainActivity.class);
+                        startActivity(intent4);
+                        return true;
+
+                    case R.id.navigation_request:
+                        Intent intent = new Intent(DmvDocuments.this, RequestCred.class);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.navigation_log:
+                        Intent intent2 = new Intent(DmvDocuments.this, LogActivity.class);
+                        startActivity(intent2);
+                        return true;
+
+                    case R.id.navigation_documents:
+                        Intent intent3 = new Intent(DmvDocuments.this, CurrentDocuments.class);
+                        startActivity(intent3);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         spinDetailsDmv = findViewById(R.id.spinDetailsDmv);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dmv_info, android.R.layout.simple_spinner_item);
@@ -38,9 +74,6 @@ public class DmvDocuments extends AppCompatActivity {
                         break;
                     case 1:
                         loadDmvRecord();
-                        break;
-                    case 2:
-                        wvDetailsDmv.loadUrl("about:blank");
                         break;
                 }
             }
