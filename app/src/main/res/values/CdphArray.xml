@@ -3,6 +3,6 @@
     <string-array name="cdph_info">
         <item>Available Actions</item>
         <item>Display Vaccination Record</item>
-        <item>Revoke Record</item>
+        <item>Revoke Credential</item>
     </string-array>
 </resources>

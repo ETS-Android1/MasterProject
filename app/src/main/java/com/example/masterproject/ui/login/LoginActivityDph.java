@@ -37,6 +37,7 @@ import com.example.masterproject.RequestedPage;
 import com.example.masterproject.ui.login.LoginViewModel;
 import com.example.masterproject.ui.login.LoginViewModelFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
@@ -163,8 +164,17 @@ public class LoginActivityDph extends AppCompatActivity {
                                     //nextActivity();
                                 }
                                 else{
-                                    dupData();
-                                    getKey(addData, queue);
+                                    String path = LoginActivityDph.this.getFilesDir().getAbsolutePath() + "/" + value + "_KEY.txt";
+                                    File file = new File(path);
+                                    if (!file.exists()){
+                                        Log.d(TAG, "FILE EXISTS " + response);
+                                        getKey(addData, queue);
+                                        nextActivity();
+                                    }
+                                    else{
+                                        dupData();
+                                        getKey(addData, queue);
+                                    }
                                 }
                             }
                         }, new Response.ErrorListener() {

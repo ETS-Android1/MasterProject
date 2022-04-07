@@ -23,8 +23,17 @@ public class RequestedPage extends AppCompatActivity {
 
         iv_Logo = findViewById(R.id.ivLogo);
 
-        Bundle extras = getIntent().getExtras();
-        String value = extras.getString("key");
+        String value;
+        int flag = 0;
+
+        try{
+            Bundle extras = getIntent().getExtras();
+            value = extras.getString("key");
+        } catch (Exception e) {
+            e.printStackTrace();
+            value = "";
+        }
+
 
         if (value.equals("dph")){
             iv_Logo.setImageResource(R.mipmap.cadph_logo);
@@ -32,13 +41,24 @@ public class RequestedPage extends AppCompatActivity {
         else if (value.equals("csuf")){
             iv_Logo.setImageResource(R.mipmap.csuf_logo);
         }
-        else{
+        else if (value.equals("dmv")){
             iv_Logo.setImageResource((R.mipmap.dmv_1_logo));
+        }
+        else{
+            iv_Logo.setVisibility(View.INVISIBLE);
+            flag = 1;
+        }
+
+        tv_requestMade = findViewById(R.id.tv_requestMade);
+
+        if (flag == 1){
+            tv_requestMade.setText("Your request has been denied.\nYou already have this credential");
+        }
+        else{
+            tv_requestMade.setText("Your request has been submitted.\n");
         }
 
 
-        tv_requestMade = findViewById(R.id.tv_requestMade);
-        tv_requestMade.setText("Your request has been submitted.\n");
 
         btn_home = findViewById(R.id.btnReturn);
 

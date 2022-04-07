@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class LogActivity extends AppCompatActivity {
         });
 
         tvLog = findViewById(R.id.tvLog);
+
+        tvLog.setMovementMethod(new ScrollingMovementMethod());
 
         File file = new File(LogActivity.this.getFilesDir().getAbsolutePath() + "/logFile.txt");
         String myLog = "";

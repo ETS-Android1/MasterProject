@@ -44,6 +44,7 @@ import com.example.masterproject.ui.login.LoginViewModelFactory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -163,21 +164,29 @@ public class LoginActivityCsuf extends AppCompatActivity {
                                 if (response.equals("null")){
                                     postData(addData, queue);
                                     nextActivity();
-
                                 }
                                 else{
-                                    dupData();
-                                    getKey(addData, queue);
+                                    String path = LoginActivityCsuf.this.getFilesDir().getAbsolutePath() + "/csuf_KEY.txt";
+                                    File file = new File(path);
+                                    if (!file.exists()){
+                                        Log.d(TAG, "FILE NOT EXISTS " + response);
+                                        getKey(addData, queue);
+                                        nextActivity();
+                                    }
+                                    else{
+                                        dupData();
+                                        getKey(addData, queue);
+                                    }
                                 }
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "FAILED HERE " + "ON ERROR");
                         Toast.makeText(LoginActivityCsuf.this, "FAILED_verify", Toast.LENGTH_LONG).show();
                         }
                     });
                 queue.add(stringRequestVerify);
-
             }
         });
     }
@@ -198,6 +207,7 @@ public class LoginActivityCsuf extends AppCompatActivity {
     void postData(String addData, RequestQueue queue){
         //String post_url = "http://127.0.0.1:8000/add_block/" + "?data=" + addData;
         String post_url = "http://10.0.2.2:8000/add_block/" + "?data=" + addData;
+
         Log.d(TAG, "3 " + post_url);
         Log.d(TAG, "4 " + addData);
 
@@ -236,6 +246,7 @@ public class LoginActivityCsuf extends AppCompatActivity {
     void getKey(String addData, RequestQueue queue){
         String get_url = "http://10.0.2.2:8000/publicKey/?credential=" + addData;
         //String get_url = "http://127.0.0.1:8000/publicKey/?credential=" + addData;
+
         Log.d(TAG, get_url);
 
         StringRequest stringRequestKey = new StringRequest(Request.Method.GET, get_url,
