@@ -31,23 +31,17 @@
         android:id="@+id/spinDetailsCdph"
         android:layout_width="353dp"
         android:layout_height="36dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/wvDetailsCdph"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvIssuedByCdph" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <WebView
         android:id="@+id/wvDetailsCdph"
-        android:layout_width="379dp"
-        android:layout_height="357dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="409dp"
+        android:layout_height="368dp"
+        app:layout_constraintBottom_toTopOf="@+id/bnv_cdph"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_cdph"

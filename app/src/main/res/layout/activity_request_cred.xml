@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
+        android:fontFamily="@font/quicksand_medium"
         android:text="Choose Organization"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,21 +20,24 @@
 
     <Button
         android:id="@+id/btnCsuf"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="405dp"
+        android:layout_height="90dp"
         android:layout_marginTop="44dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
         android:text="CSUF"
-        app:layout_constraintEnd_toEndOf="@+id/tv_RequestList"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/tv_RequestList"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_RequestList" />
 
     <Button
         android:id="@+id/btnDph"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@android:color/holo_orange_light"
         android:text="CA Department Of Public Health"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/btnCsuf"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnCsuf"
@@ -42,11 +46,13 @@
     <Button
         android:id="@+id/btnDmv"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:text="CA DMV"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/btnDph"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnDph"
         app:layout_constraintTop_toBottomOf="@+id/btnDph" />
 

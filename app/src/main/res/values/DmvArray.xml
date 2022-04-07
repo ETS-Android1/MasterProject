@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="dmv_info">
-        <item>Available Documents</item>
-        <item>Driver License</item>
+        <item>Available Actions</item>
+        <item>Display ID QR Code</item>
+        <item>Revoke Credential</item>
     </string-array>
 </resources>

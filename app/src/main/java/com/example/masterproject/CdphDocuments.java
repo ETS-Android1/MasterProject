@@ -1,8 +1,11 @@
 package com.example.masterproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +16,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.masterproject.ui.login.LoginActivityCsuf;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CdphDocuments extends AppCompatActivity {
 
@@ -24,6 +35,7 @@ public class CdphDocuments extends AppCompatActivity {
     Spinner spinDetailsCdph;
     WebView wvDetailsCdph;
     BottomNavigationView bnv;
+    private String TAG = "cdphDocuments";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +88,7 @@ public class CdphDocuments extends AppCompatActivity {
                         loadVaccine();
                         break;
                     case 2:
-                        wvDetailsCdph.loadUrl("about:blank");
+                        popAlert();
                         break;
                 }
             }
@@ -95,6 +107,54 @@ public class CdphDocuments extends AppCompatActivity {
         String img_url = "https://raw.githubusercontent.com/briankptan/MasterProject/master/IDR_DPH.png";
 
         Picasso.get().load(img_url).resize(1500,800).into(ivCdphRecord);
+    }
+
+    private void popAlert() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(CdphDocuments.this);
+        builder1.setMessage("Are you sure?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        String path = CdphDocuments.this.getFilesDir().getAbsolutePath() + "/dph_KEY.txt";
+                        new File(path).delete();
+                        writeToLog();
+                        dialog.cancel();
+                        backToMain();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    private void writeToLog() {
+        try{
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(CdphDocuments.this.openFileOutput("logFile.txt", Context.MODE_APPEND));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+            String currentDateTime = dateFormat.format(new Date());
+            outputStreamWriter.write(currentDateTime + " CDPH Credential Revoked\n");
+
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.d(TAG, "FAILED TO WRITE TO Log");
+        }
+    }
+
+    private void backToMain() {
+        Toast.makeText(CdphDocuments.this, "CDPH Credential Revoked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(CdphDocuments.this, MainActivity.class);
+        startActivity(intent);
     }
 
     void loadVaccine(){

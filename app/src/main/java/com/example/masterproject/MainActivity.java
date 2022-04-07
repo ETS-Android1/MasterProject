@@ -31,14 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnRequest = findViewById(R.id.btnRequest);
-        btnCurrent = findViewById(R.id.btnCurrent);
-        btnLog = findViewById(R.id.btnLog);
-
-        btnRequest.setVisibility(View.INVISIBLE);
-        btnCurrent.setVisibility(View.INVISIBLE);
-        btnLog.setVisibility(View.INVISIBLE);
-
         tvWelcome = findViewById(R.id.tv_welcome);
         tvWelcome.setText("Self-Sovereign Briefcase");
 
@@ -69,31 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
-            }
-        });
-
-        btnRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //navigate to requestCred page
-                Intent intent = new Intent(MainActivity.this, RequestCred.class);
-                startActivity(intent);
-            }
-        });
-
-        btnLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LogActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnCurrent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CurrentDocuments.class);
-                startActivity(intent);
             }
         });
     }

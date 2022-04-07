@@ -1,10 +1,14 @@
 package com.example.masterproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -13,10 +17,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DmvDocuments extends AppCompatActivity {
 
@@ -24,6 +35,7 @@ public class DmvDocuments extends AppCompatActivity {
     Spinner spinDetailsDmv;
     WebView wvDetailsDmv;
     BottomNavigationView bnv;
+    private String TAG = "dmvDocuments";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +87,9 @@ public class DmvDocuments extends AppCompatActivity {
                     case 1:
                         loadDmvRecord();
                         break;
+                    case 2:
+                        popAlert();
+                        break;
                 }
             }
 
@@ -90,9 +105,58 @@ public class DmvDocuments extends AppCompatActivity {
         ivDmvRecord = findViewById(R.id.ivDmvRecord);
 
         //check this url
-        String img_url = "https://raw.githubusercontent.com/briankptan/MasterProject/master/IDR_DMV.png";
+        //String img_url = "https://raw.githubusercontent.com/briankptan/MasterProject/master/IDR_DMV.png";
+        String img_url = "https://raw.githubusercontent.com/briankptan/MasterProject/master/IDR_DL_SAMPLE.png";
 
         Picasso.get().load(img_url).resize(1500,800).into(ivDmvRecord);
+    }
+
+    private void popAlert() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(DmvDocuments.this);
+        builder1.setMessage("Are you sure?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        String path = DmvDocuments.this.getFilesDir().getAbsolutePath() + "/dmv_KEY.txt";
+                        new File(path).delete();
+                        writeToLog();
+                        dialog.cancel();
+                        backToMain();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    private void backToMain() {
+        Toast.makeText(DmvDocuments.this, "DMV Credential Revoked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(DmvDocuments.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void writeToLog() {
+        try{
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(DmvDocuments.this.openFileOutput("logFile.txt", Context.MODE_APPEND));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+            String currentDateTime = dateFormat.format(new Date());
+            outputStreamWriter.write(currentDateTime + " DMV Credential Revoked\n");
+
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.d(TAG, "FAILED TO WRITE TO Log");
+        }
     }
 
     void loadDmvRecord(){

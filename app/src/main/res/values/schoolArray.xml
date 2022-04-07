@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="school_info">
-        <item>Available Documents</item>
-        <item>Transcript</item>
+        <item>Available Actions</item>
+        <item>Display Transcript</item>
+        <item>Revoke Credential</item>
     </string-array>
 </resources>
