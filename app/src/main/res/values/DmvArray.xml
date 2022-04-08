@@ -2,7 +2,7 @@
 <resources>
     <string-array name="dmv_info">
         <item>Available Actions</item>
-        <item>Display ID QR Code</item>
+        <item>Display Rear of ID and QR Code</item>
         <item>Revoke Credential</item>
     </string-array>
 </resources>

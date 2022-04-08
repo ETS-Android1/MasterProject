@@ -143,8 +143,8 @@ public class LoginActivityDph extends AppCompatActivity {
                         passwordEditText.getText().toString());
                 String addData = usernameEditText.getText().toString();
 
-                String check_ID = "http://10.0.2.2:8000/verify/?credential=" + addData;
-                //String check_ID = "http://127.0.0.1:8000/verify/?credential=" + addData;
+                //String check_ID = "http://10.0.2.2:8000/verify/?credential=" + addData;
+                String check_ID = "http://127.0.0.1:8000/verify/?credential=" + addData;
                 Log.d(TAG, "1: " + check_ID);
 
                 writeLogFile();
@@ -210,8 +210,8 @@ public class LoginActivityDph extends AppCompatActivity {
     }
 
     void postData(String addData, RequestQueue queue){
-        //String post_url = "http://127.0.0.1:8000/add_block/" + "?data=" + addData;
-        String post_url = "http://10.0.2.2:8000/add_block/" + "?data=" + addData;
+        String post_url = "http://127.0.0.1:8000/add_block/" + "?data=" + addData;
+        //String post_url = "http://10.0.2.2:8000/add_block/" + "?data=" + addData;
         Log.d(TAG, "3 " + post_url);
         Log.d(TAG, "4 " + addData);
 
@@ -248,8 +248,8 @@ public class LoginActivityDph extends AppCompatActivity {
     }
 
     void getKey(String addData, RequestQueue queue){
-        String get_url = "http://10.0.2.2:8000/publicKey/?credential=" + addData;
-        //String get_url = "http://127.0.0.1:8000/publicKey/?credential=" + addData;
+        //String get_url = "http://10.0.2.2:8000/publicKey/?credential=" + addData;
+        String get_url = "http://127.0.0.1:8000/publicKey/?credential=" + addData;
         Log.d(TAG, get_url);
 
         StringRequest stringRequestKey = new StringRequest(Request.Method.GET, get_url,
